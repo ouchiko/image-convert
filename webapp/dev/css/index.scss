@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+$fontFace: "Nunito";
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+// Single side border-radius
+
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+   -webkit-border-top-left-radius: $radius;
+   border-top-left-radius: $radius;
+   background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+     -webkit-border-top-right-radius: $radius;
+     border-top-right-radius: $radius;
+     background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+   -webkit-border-bottom-left-radius: $radius;
+   border-bottom-left-radius: $radius;
+   background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+     -webkit-border-top-left-radius: $radius;
+     border-top-left-radius: $radius;
+     background-clip: padding-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.heading {
+    padding: 20px;
+    background-color: #444;
+    color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    font-family: $fontFace;
+    .heading--title {
+        font-size: 30px;
+    }
+    .heading--info {
+        a {
+            color: rgb(211, 184, 215)
+        }
+    }
+}
+.container {
+    padding: 20px;
+    p, div {
+        font-family: $fontFace;
+    }
+}
+
+form {
+    margin-top: 10px;
+    .form--file {
+       position: absolute;
+       left: -100px;
+       top: -100px;
+    }
+    .form--label {
+        background-color:rgb(36, 74, 106);
+        color:#FFF;
+        font-family: $fontFace;
+        font-size: 16px;
+        padding: 10px;
+        @include border-radius(4px);
+        border: none;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .form--button {
+        background-color:rgb(36, 74, 106);
+        color:#FFF;
+        font-family: $fontFace;
+        font-size: 16px;
+        padding: 10px;
+        @include border-radius(4px);
+        border: none;
+        cursor: pointer;
+    }
+}
