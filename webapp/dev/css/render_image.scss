@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+.container {
+
+    .container--image {
+        &__hide {
+            display: none;
+        }
+    }
+
+    .container--wait {
+        position: fixed;
+        width: 400px;
+        left: 50%;
+        top: 40%;
+        text-align:center;
+        margin-left:-200px;
+        color: rgb(23, 92, 117);
+        &__hide {
+            display: none;
+        }
+    }
+
+    .wait--title {
+        font-family: "Nunito";
+        font-size: 40px;
+    }
+
+    .wait--spinner {
+        margin-bottom: 20px;
+        font-size: 56px;
+    }
+}

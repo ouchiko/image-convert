@@ -1,0 +1,13 @@
+html
+    head
+        script(src='/build/render_image.js')
+        script(src='//use.fontawesome.com/0790c661a1.js')
+        script
+            | var imageid = '#{imageid}';
+        link(rel='stylesheet' href='/build/render_image.css')
+    body
+        div(class='container')
+            div(class='container--wait')
+                li(class='fa fa-spin fa-circle-o-notch wait--spinner')
+                div(class='wait--title') Loading image
+            div(class='container--image container--image__hide')

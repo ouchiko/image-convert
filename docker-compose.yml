@@ -1,0 +1,9 @@
+version: '2'
+services:
+    api-front:
+        build: ./
+        volumes:
+            - ./:/app
+        command: /app/init.sh
+        ports:
+            - 5000:5000

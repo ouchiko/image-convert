@@ -1,0 +1,45 @@
+{
+  "name": "image-convert",
+  "version": "1.0.0",
+  "description": "Local Image Conversion Tool",
+  "main": "./main.js",
+  "entrypoint": "./main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-server": "nodemon main.js",
+    "test-convert": "node /app/convert/tests/test.js"
+  },
+  "author": "ouchiko",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "formidable": "^1.1.1",
+    "imagemagick": "^0.1.3",
+    "jade": "^1.11.0",
+    "md5": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-javascript-obfuscator": "^1.1.4",
+    "gulp-minify": "^2.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "nodemon": "^1.12.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

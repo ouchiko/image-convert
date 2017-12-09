@@ -1,0 +1,15 @@
+html
+    head
+        title Image Conversion
+        link(rel='stylesheet' href='/build/app.css')
+
+    body
+        div(data-id='boom' class='container fist')
+            h1.
+                Image Conversion tool.
+            div.
+                Please choose your file
+
+            form(action='/convert' method='post' enctype='multipart/form-data')
+                input(type='file' name='convertfile')
+                input(type='submit')
