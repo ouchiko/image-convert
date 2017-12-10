@@ -5,7 +5,7 @@
   "main": "./main.js",
   "entrypoint": "./main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "test-server": "nodemon main.js",
     "test-convert": "node /app/convert/tests/test.js"
   },
@@ -33,6 +33,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
+    "jest": "^21.2.1",
     "nodemon": "^1.12.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
