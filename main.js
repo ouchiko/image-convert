@@ -48,7 +48,7 @@ try {
      */
     app.get('/images/:id/isloaded', (req, res) => {
         let result = {'found':'no'};
-        if (fs.existsSync("./webapp/static/assets/processed/"+req.params.id+".png")) {
+        if (fs.existsSync("./webapp/static/assets/processed/"+req.params.id+"-black.png")) {
             result.found = 'yes';
         }
         res.send(result)

@@ -18,46 +18,41 @@ class Convert
     getEPStoPNG(width=false, height=false)
     {
         console.log("Filepath: " + this.filepath);
-
-
         this.idx = md5(this.upload_filename);
-        this.destination = "/app/webapp/static/assets/processed/" + this.idx + ".png";
+        this.destination = "/app/webapp/static/assets/processed/" + this.idx;
 
         if (fs.existsSync(this.filepath)) {
-
-
-            //fs.copy(this.filepath,'/app/webapp/static/assets/processed/test.eps' );
-//convert -colorspace sRGB -density 600 "/images/$r" -background white -resize 650x -flatten -units pixelsperinch -density 224.993 "/output/png/$r-white.png"
-
-            let options = [
-                '-colorspace','sRGB','-density','600',
-                this.filepath,
-                '-resize','2050x','-background','transparent','-flatten','-units','pixelsperinch','-density','224.993',
-              this.destination
-            ];
-
-          console.log(options);
-
-            console.log(" - File is available.");
-            console.log("  - From: " + this.filepath);
-            console.log("  - To: " + this.destination)
-            console.log("   - Converting..");
-            im.convert(options,
-                function(err, stdout){
-                  if (err) {
-                      console.log("Error: " + err.message);
-                  } else {
-                      console.log('Messages:', stdout);
-                  }
-                }
-            );
+            let options = {
+                'trans': ['-colorspace','sRGB','-density','600', this.filepath, '-resize',
+                '2000x','-background','transparent','-flatten','-units',
+                'pixelsperinch','-density','224.993',this.destination + "-trans.png"
+                ],
+                'white': [
+                '-colorspace','sRGB','-density','600', this.filepath, '-resize',
+                '2000x','-background','white','-flatten','-units',
+                'pixelsperinch','-density','224.993',this.destination + "-white.png"
+                ],
+                'black': [
+                '-colorspace','sRGB','-density','600', this.filepath, '-resize',
+                '2000x','-background','black','-flatten','-units',
+                'pixelsperinch','-density','224.993',this.destination + "-black.png"
+                ]
+            }
+            for (var i in options) {
+                im.convert(options[i],
+                    function(err, stdout){
+                      if (err) {
+                          console.log("Error: " + err.message);
+                      } else {
+                          console.log('Messages:', stdout);
+                      }
+                    }
+                );
+            }
             console.log("   - Finished");
         } else {
             console.log(" - File does not exist.");
         }
-
-
-
         return this.idx;
     }
 }
