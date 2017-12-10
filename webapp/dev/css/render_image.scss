@@ -3,6 +3,7 @@
 .container {
 
     .container--image {
+        display: flex;
         &__hide {
             display: none;
         }
@@ -29,5 +30,17 @@
     .wait--spinner {
         margin-bottom: 20px;
         font-size: 56px;
+    }
+}
+
+.imagecontainer {
+    padding: 3px;
+    border: 1px solid #CCC;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor:pointer;
+
+    .imagecontainer--item {
+        width: 400px;
     }
 }
