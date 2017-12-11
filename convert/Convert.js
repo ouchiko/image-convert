@@ -24,6 +24,8 @@ class Convert
         };
         let extension = path.extname(this.filepath).replace(".", "");
         console.log("  - File Extension: " + extension);
+        console.log("  - Exists: " + fs.existsSync(this.filepath));
+        console.log("  - Resolution: " + extensions[extension.toUpperCase()]);
         if (fs.existsSync(this.filepath) && extensions[extension.toUpperCase()]) {
             return true;
         } else {
@@ -37,7 +39,7 @@ class Convert
         if (this.isValidFile()) {
             console.log("  - Filepath: " + this.filepath);
             this.idx = md5(this.upload_filename);
-            this.destination = "/app/webapp/static/assets/processed/" + this.idx;
+            this.destination = "../webapp/static/assets/processed/" + this.idx;
 
             console.log("IDX: " +this.idx);
 
