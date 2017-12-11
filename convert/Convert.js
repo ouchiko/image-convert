@@ -39,6 +39,8 @@ class Convert
             this.idx = md5(this.upload_filename);
             this.destination = "/app/webapp/static/assets/processed/" + this.idx;
 
+            console.log("IDX: " +this.idx);
+
             if (fs.existsSync(this.filepath)) {
                 let options = {
                     'trans': ['-colorspace','sRGB','-density','600', this.filepath, '-resize',
