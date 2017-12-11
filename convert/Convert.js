@@ -9,6 +9,24 @@ class Convert
     {
         this.filepath = filepath;
         this.upload_filename = upload_filename;
+        this.idx = md5(this.upload_filename);
+        this.destination = "../webapp/static/assets/processed/" + this.idx;
+        this.options = {
+            'trans': ['-colorspace','sRGB','-density','600', this.filepath, '-resize',
+            '2000x','-background','transparent','-flatten','-units',
+            'pixelsperinch','-density','224.993',this.destination + "-trans.png"
+            ],
+            'white': [
+            '-colorspace','sRGB','-density','600', this.filepath, '-resize',
+            '2000x','-background','white','-flatten','-units',
+            'pixelsperinch','-density','224.993',this.destination + "-white.png"
+            ],
+            'black': [
+            '-colorspace','sRGB','-density','600', this.filepath, '-resize',
+            '2000x','-background','black','-flatten','-units',
+            'pixelsperinch','-density','224.993',this.destination + "-black.png"
+            ]
+        };
     }
 
     /**
@@ -23,66 +41,27 @@ class Convert
             "PDF": true
         };
         let extension = path.extname(this.filepath).replace(".", "");
-        console.log("  - File Extension: " + extension);
-        console.log("  - Exists: " + fs.existsSync(this.filepath));
-        console.log("  - Resolution: " + extensions[extension.toUpperCase()]);
-        if (fs.existsSync(this.filepath) && extensions[extension.toUpperCase()]) {
-            return true;
-        } else {
-            console.log("  - Invalid file extension");
-            return false;
-        }
+        return (fs.existsSync(this.filepath) &&
+                extensions[extension.toUpperCase()]) ? true : false;
     }
 
-    getEPStoPNG(width=false, height=false)
+    convertFileToPNG(width=false, height=false)
     {
-        if (this.isValidFile()) {
-            console.log("  - Filepath: " + this.filepath);
-            this.idx = md5(this.upload_filename);
-            this.destination = "../webapp/static/assets/processed/" + this.idx;
-
-            console.log("IDX: " +this.idx);
-
-            if (fs.existsSync(this.filepath)) {
-                let options = {
-                    'trans': ['-colorspace','sRGB','-density','600', this.filepath, '-resize',
-                    '2000x','-background','transparent','-flatten','-units',
-                    'pixelsperinch','-density','224.993',this.destination + "-trans.png"
-                    ],
-                    'white': [
-                    '-colorspace','sRGB','-density','600', this.filepath, '-resize',
-                    '2000x','-background','white','-flatten','-units',
-                    'pixelsperinch','-density','224.993',this.destination + "-white.png"
-                    ],
-                    'black': [
-                    '-colorspace','sRGB','-density','600', this.filepath, '-resize',
-                    '2000x','-background','black','-flatten','-units',
-                    'pixelsperinch','-density','224.993',this.destination + "-black.png"
-                    ]
-                }
-                console.log("  - Generating images");
-                for (var i in options) {
-                    im.convert(options[i],
-                        function(err, stdout){
-                          if (err) {
-                              console.log("  - Error: " + err.message);
-                              return false;
-                          } else {
-                              console.log('  - Messages:', stdout);
-                          }
-                        }
-                    );
-                }
-                console.log("  - Finished");
-                return this.idx;
-            } else {
-                console.log("  - File does not exist.");
-                return false;
-            }
-        } else {
-            console.log("  - Invalid file test");
+        if (!this.isValidFile()) {
             return false;
         }
+
+        for (var i in this.options) {
+            im.convert(
+                this.options[i],
+                function(err, stdout){
+                    if (err) {
+                        return false;
+                    }
+                }
+            );
+        }
+        return this.idx;
     }
 }
 
