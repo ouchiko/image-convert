@@ -4,9 +4,9 @@ services:
 node_js:
   - "stable"
 before_install:
-  - apt-get install -y imagemagick libmagick++-dev node-gyp curl
+  - sudo apt-get install -y imagemagick libmagick++-dev node-gyp curl
   - curl -sL https://deb.nodesource.com/setup_9.x | bash -
-  - apt-get install -y nodejs
+  - sudo apt-get install -y nodejs
   - export PATH=$PATH:/opt/ImageMagick/bin
   - npm install
 
