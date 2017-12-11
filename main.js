@@ -17,6 +17,7 @@ const host = "0.0.0.0";
 const port = 5000;
 const views = __dirname + '/webapp/views';
 const static = __dirname + '/webapp/static';
+const processed = __dirname + '/webapp/static/assets/processed'
 
 try {
     /* Define the view elements */
@@ -93,7 +94,7 @@ try {
                     console.log(" - Upload exists.");
                     console.log(" - RealName: " + files.convertfile.name);
                     let testConvert = new Convert(oldpath, files.convertfile.name);
-                    imageurl = testConvert.getEPStoPNG(1000,false);
+                    imageurl = testConvert.convertFileToPNG(1000,false);
                     if (imageurl) {
                         console.log("- Conversion returned: " + imageurl);
                         res.redirect('/images/'+imageurl+"/render");
