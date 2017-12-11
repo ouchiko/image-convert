@@ -36,7 +36,6 @@ try {
     /**
      * /images/12345/render
      * Renders an image to the user.
-     * @param <string> id
      */
     app.get('/error/:type', (req, res) => {
         res.render('error_page', {error_code: req.params.type});
@@ -45,7 +44,6 @@ try {
     /**
      * /images/12345/render
      * Renders an image to the user.
-     * @param <string> id
      */
     app.get('/images/:id/render', (req, res) => {
         res.render('render_image', {imageid: req.params.id});
@@ -54,11 +52,10 @@ try {
     /**
      * /images/12345/isloaded
      * Is the image ready to be loaded
-     * @param <string> id
      */
     app.get('/images/:id/isloaded', (req, res) => {
         let result = {'found':'no'};
-        if (fs.existsSync("./webapp/static/assets/processed/"+req.params.id+"-black.png")) {
+        if (fs.existsSync(processed+"/"+req.params.id+"-black.png")) {
             result.found = 'yes';
         }
         res.send(result)
@@ -67,7 +64,6 @@ try {
     /**
      * /convert (post)
      * The conversion sericce.
-     * @param <file> convertfile
      */
     app.post("/convert", (req,res) => {
 

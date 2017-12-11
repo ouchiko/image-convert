@@ -27,7 +27,7 @@ test('Do the generated files exist', () => {
     let interval = setInterval(()=> {
         if (status||file_sync==5) {
             clearInterval(interval);
-            return status;
+            expect(status).toBe(true);
         }
 
         status = fs.existsSync(files[0])

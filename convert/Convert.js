@@ -45,21 +45,26 @@ class Convert
                 extensions[extension.toUpperCase()]) ? true : false;
     }
 
-    convertFileToPNG(width=false, height=false)
+    /**
+     * Make conversion from acceptable format file to PNG
+     */
+    convertFileToPNG()
     {
         if (!this.isValidFile()) {
             return false;
         }
 
         for (var i in this.options) {
-            im.convert(
-                this.options[i],
-                function(err, stdout){
-                    if (err) {
-                        return false;
+            if (this.options.hasOwnProperty(this.options[i])) {
+                im.convert(
+                    this.options[i],
+                    function(err, stdout){
+                        if (err) {
+                            return false;
+                        }
                     }
-                }
-            );
+                );
+            }
         }
         return this.idx;
     }
