@@ -5,5 +5,10 @@ node_js:
   - "stable"
 before_install:
   - npm install
+  - docker build -t Dockerfile .
+  - docker run -d -p 5000:5000 . /bin/sh -c "cd /app/; npm run test-server"
+  - docker ps -a
+  - docker run . /bin/sh -c "cd /app; npm run test"
+
 script:
   - npm run test
