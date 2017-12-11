@@ -37,6 +37,15 @@ try {
      * Renders an image to the user.
      * @param <string> id
      */
+    app.get('/error/:type', (req, res) => {
+        res.render('error_page', {error_code: req.params.type});
+    });
+
+    /**
+     * /images/12345/render
+     * Renders an image to the user.
+     * @param <string> id
+     */
     app.get('/images/:id/render', (req, res) => {
         res.render('render_image', {imageid: req.params.id});
     });
@@ -64,34 +73,40 @@ try {
         let imageurl = "#";
         let oldpath = "";
 
+        console.log("= Conversion Request =");
+
         Convert = require("./convert/Convert.js");
         try {
             var form = new formidable.IncomingForm();
             form.keepExtensions = true;
             form.parse(req, function (err, fields, files) {
-                //console.dir(files);
+                console.log(" - Form parsing");
                 if (files && files.convertfile) {
                     oldpath = files.convertfile.path;
-                    console.dir(files.convertfile);
+                    console.log(" - File found in form object: " + oldpath);
                 } else {
-                    console.log("Files is empty...");
+                    console.log(" - No file found in form object");
+                    return false;
                 }
 
                 if (oldpath && fs.existsSync(oldpath)) {
-                    console.log("Processing request for image conversion");
-                    console.log("RealName: " + files.convertfile.name);
+                    console.log(" - Upload exists.");
+                    console.log(" - RealName: " + files.convertfile.name);
                     let testConvert = new Convert(oldpath, files.convertfile.name);
                     imageurl = testConvert.getEPStoPNG(1000,false);
-                    console.log("Got responise with: " + imageurl);
-
-                    //res.render('convert', {url: imageurl});
-                    res.redirect('/images/'+imageurl+"/render");
+                    if (imageurl) {
+                        console.log("- Conversion returned: " + imageurl);
+                        res.redirect('/images/'+imageurl+"/render");
+                    } else {
+                        res.redirect('/error/invalid_converion');
+                    }
                 } else {
-                    res.render('/error');
+                    res.render('/error/unknown_file');
                 }
             });
         } catch (exception) {
             console.log(" - Error: " + exception.message);
+            res.render('/error/process_error');
         }
 
     });

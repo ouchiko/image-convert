@@ -4,6 +4,6 @@ services:
         build: ./
         volumes:
             - ./:/app
-        command: /app/test.sh
+        command: /app/init.sh
         ports:
             - 5000:5000

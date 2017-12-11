@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
                         containerImage.appendChild(createImage('trans'));
                         containerImage.appendChild(createImage('white'));
                         containerImage.appendChild(createImage('black'));
-                    }, 500);
+                    }, 2000);
                 }
             })
             .catch(function(error) {
