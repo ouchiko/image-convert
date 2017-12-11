@@ -4,11 +4,11 @@ services:
 node_js:
   - "stable"
 before_install:
+  - apt-get install -y imagemagick libmagick++-dev node-gyp curl
+  - curl -sL https://deb.nodesource.com/setup_9.x | bash -
+  - apt-get install -y nodejs
+  - export PATH=$PATH:/opt/ImageMagick/bin
   - npm install
-  - docker build -t testbuild .
-  - docker run -d -v $PWD:/app -p 5000:5000 testbuild /bin/sh -c "cd /app; npm run test-server"
-  - docker ps -a
-  - docker run testbuild /bin/sh -c "cd /app npm run test"
 
 script:
   - npm run test
